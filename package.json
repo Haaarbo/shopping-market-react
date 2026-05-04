@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
+    "@tanstack/react-query": "^5.100.9",
+    "@types/lodash": "^4.17.24",
     "eslint-plugin-tailwindcss": "^3.18.3",
     "json-server": "^1.0.0-beta.15",
+    "lodash": "^4.18.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

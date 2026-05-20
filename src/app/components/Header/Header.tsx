@@ -1,12 +1,15 @@
-import { Input } from "../../components";
+import { Input, List } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { searchName } from "../../services/product.service";
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import type { ProductProps } from "../../interfaces/Product";
 import { debounce } from "lodash";
+import { useOnClickOutside } from "../../hooks/useClickOutside";
 
 const Header = () => {
 	const [productName, setProductName] = useState("");
+	const [isOpen, setIsOpen] = useState(false);
+	const refDropdown = useRef<HTMLUListElement>(null);
 
 	const {
 		data: productsByName,
@@ -16,12 +19,24 @@ const Header = () => {
 		queryKey: ["query-products-by-name", productName],
 		queryFn: () => searchName(productName),
 		enabled: productName.length > 0,
+		// onSucess: (res) => {setIsOpen(res?.length>0)} >> NAO EXISTE NESTA VERSAO
 	});
+
+	// Substitue o onSucess
+	// const isOpen = !!productsByName?.length;
+
+	useEffect(() => {
+		setIsOpen(!!productsByName?.length);
+	}, [productsByName]);
 
 	const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setProductName(value);
 	};
+
+	useOnClickOutside(refDropdown, () => {
+		setIsOpen(false);
+	});
 
 	const debounceHandleOnChange = debounce(handleInput, 500);
 
@@ -38,13 +53,30 @@ const Header = () => {
 							/>
 						</a>
 					</div>
-					<div className="w-4/5">
+					<div className="w-4/5 relative ">
 						<Input onChange={debounceHandleOnChange} />
-						<ul>
-							{productsByName?.map((product: ProductProps) => {
-								return <li>{product.name}</li>;
-							})}
-						</ul>
+						{isOpen && (
+							<ul
+								ref={refDropdown}
+								className="absolute z-50 mt-4 max-h-60 w-full overflow-auto rounded-md bg-white p-4 shadow-lg"
+							>
+								{productsByName?.map((product: ProductProps) => {
+									return (
+										<List className="items-center justify-between">
+											{product.name}
+											<div>
+												<img
+													src={`http://localhost:5173/public/assets/products/${product.image}.jpg`}
+													alt={product.name}
+													className="h-20 rounded-t-lg object-cover"
+												/>
+												<span>R$ {product.price}</span>
+											</div>
+										</List>
+									);
+								})}
+							</ul>
+						)}
 					</div>
 					<div>Carrinho</div>
 				</div>

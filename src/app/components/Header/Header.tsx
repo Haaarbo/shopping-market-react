@@ -6,6 +6,7 @@ import type { ProductProps } from "../../interfaces/Product";
 import { debounce } from "lodash";
 import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { CiShoppingCart } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	const [productName, setProductName] = useState("");
@@ -79,9 +80,9 @@ const Header = () => {
 							</ul>
 						)}
 					</div>
-					<a href="/shopping-cart">
+					<Link className="flex" to="/shopping-cart" relative="path">
 						<CiShoppingCart className="h-12 w-20" />
-					</a>
+					</Link>
 				</div>
 			</header>
 		</>

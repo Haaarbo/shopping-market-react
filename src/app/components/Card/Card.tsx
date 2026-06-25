@@ -1,7 +1,10 @@
 import { Button } from "../../components";
+import { useShoppingList } from "../../contexts";
 import type { Product } from "../../interfaces/Product";
 
 const Card = ({ item }: Product) => {
+	const { addProduct } = useShoppingList();
+
 	return (
 		<div className="flex h-96 flex-col justify-center bg-white p-2 w-64 rounded-2xl">
 			<div className="flex justify-center">
@@ -19,7 +22,9 @@ const Card = ({ item }: Product) => {
 					<span>{item.price}</span>
 				</div>
 			</div>
-			<Button>Adicionar no Carrinho</Button>
+			<Button onClick={(e) => {e.stopPropagation(); addProduct(item.id, item.name, item.price)}}>
+				Adicionar no Carrinho
+			</Button>
 		</div>
 	);
 };

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import type { ProductProps } from "../../interfaces/Product";
 import { debounce } from "lodash";
 import { useOnClickOutside } from "../../hooks/useClickOutside";
+import { CiShoppingCart } from "react-icons/ci";
 
 const Header = () => {
 	const [productName, setProductName] = useState("");
@@ -78,7 +79,9 @@ const Header = () => {
 							</ul>
 						)}
 					</div>
-					<div>Carrinho</div>
+					<a href="/shopping-cart">
+						<CiShoppingCart className="h-12 w-20" />
+					</a>
 				</div>
 			</header>
 		</>

@@ -1,17 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Header } from "./app/components";
-import { Home } from "./app/view";
+import { Layout } from "./app/components";
+import { Home, ShoppingCart } from "./app/view";
 
 function App() {
 	const route = createBrowserRouter([
 		{
-			path: "/",
-			element: (
-				<>
-					<Header />
-					<Home />
-				</>
-			),
+			element: <Layout/>, 
+				children: [
+					{path: "/", element: <Home />,},
+					{path: "/shopping-cart", element: <ShoppingCart />,},
+				]
+			
 		},
 	]);
 

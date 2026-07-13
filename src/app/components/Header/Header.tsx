@@ -7,11 +7,13 @@ import { debounce } from "lodash";
 import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useShoppingList } from "../../contexts";
 
 const Header = () => {
 	const [productName, setProductName] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
 	const refDropdown = useRef<HTMLUListElement>(null);
+	const { totalQtd } = useShoppingList();
 
 	const {
 		data: productsByName,
@@ -82,6 +84,12 @@ const Header = () => {
 					</div>
 					<Link className="flex" to="/shopping-cart" relative="path">
 						<CiShoppingCart className="h-12 w-20" />
+
+						{totalQtd > 0 && (
+							<div className="relative right-8 flex size-6 justify-center rounded-3xl bg-blue-400">
+								<span>{totalQtd}</span>
+							</div>
+						)}
 					</Link>
 				</div>
 			</header>

@@ -2,7 +2,7 @@ import {Button} from "../../components/Button/Button";
 import { useShoppingList } from "../../contexts";
 
 const ShoppingCart = () => {
-    const { items, addProduct, onRemove, onDecrease } = useShoppingList();
+    const { items, addProduct, onRemove, onDecrease, totalSumAmount } = useShoppingList();
 
     return (
         <div className="flex h-full flex-col gap-12">
@@ -31,6 +31,11 @@ const ShoppingCart = () => {
                         </div>  
                     )})}
                 </div>
+            </div>
+            <div className="flex justify-center">
+                <span className="ml-16 ">
+                    <strong>Valor Total: R$ {totalSumAmount.toFixed(2)}</strong>
+                </span>
             </div>
         </div>
     )

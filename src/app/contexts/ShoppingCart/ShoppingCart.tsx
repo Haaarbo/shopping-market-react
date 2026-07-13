@@ -14,8 +14,8 @@ export interface ListItem {
 
 export interface ShoppingCartListContextData {
     items: ListItem[];
-    // totalSumAmount: number;
-    // totalQtd: number;
+    totalSumAmount: number;
+    totalQtd: number;
     
     addProduct: (id: number, name: string, price: number) => void;
     onRemove: (id: number) => void;
@@ -88,11 +88,11 @@ export const ShoppingListProvider = ({
             }
         };
 
-        // const totalSumAmount = items.reduce((sum, item) => sum + item.amount, 0);
-        // const totalQtd = items.reduce((sum, item) => sum + item.quantity, 0);
+        const totalSumAmount = items.reduce((sum, item) => sum + item.amount, 0);
+        const totalQtd = items.reduce((sum, item) => sum + item.quantity, 0);
 
         return (
-            <ShoppingListContext.Provider value={{ items, addProduct, onRemove, onDecrease }}>
+            <ShoppingListContext.Provider value={{ items, addProduct, onRemove, onDecrease, totalSumAmount, totalQtd }}>
                 {children}
             </ShoppingListContext.Provider>
         );

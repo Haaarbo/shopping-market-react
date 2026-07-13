@@ -8,13 +8,14 @@ const ShoppingCart = () => {
         <div className="flex h-full flex-col gap-12">
             <div className="mt-32 flex h-4/5 justify-center overflow-x-auto">
                 <div className="flex w-3/6 flex-col gap-8">
-                    {items.map((item) => {return 
+                    {items.map((item) => {return (
                         <div key={item.id} className="flex justify-between rounded-3xl bg-white p-8">
                             <div className="flex flex-col gap-4">
                                 <p>
-                                    <span>Quantidade: {item.quantity}</span>
-                                    <span>Valor Total: {item.amount.toFixed(2)}</span>
+                                    <span className="text-center capitalize">Nome do Produto: {item.name}</span>
                                 </p>
+                                <span>Quantidade: {item.quantity}</span>
+                                <span>Valor Total: {item.amount.toFixed(2)}</span>
                             </div>
                             <div className="flex flex-col gap-5">
                                 <Button onClick={(e) => {e.stopPropagation(); addProduct(item.id, item.name, item.unitPrice)}}>
@@ -27,8 +28,8 @@ const ShoppingCart = () => {
                                     Remover
                                 </Button>
                             </div>
-                        </div>   
-                    })}
+                        </div>  
+                    )})}
                 </div>
             </div>
         </div>

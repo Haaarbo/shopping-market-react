@@ -3,12 +3,13 @@ import { twMerge } from "tailwind-merge";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const buttonVariants = tv({
+	base: "w-full rounded py-2 px-4 text-sm font-bold text-white transition-colors ease-in-out ", 
 	variants: {
 		variant: {
 			primary:
-				"w-full rounded bg-blue-500 py-2 px-4 hover:bg-blue-700 hover:text-white",
+				"  bg-blue-500 hover:bg-blue-700 hover:text-black",
 			secondary:
-				"bg-red-500 text-white hover:bg-red-700",
+				"bg-red-500 hover:bg-red-700",
 		},
 	},
 	defaultVariants: {
